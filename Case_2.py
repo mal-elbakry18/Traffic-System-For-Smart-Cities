@@ -30,6 +30,12 @@ import time
 #                 |         |       |       |       |
 #                 |         |       |       |       |
 
+# State 1:      |   State 2:    |   State 3:    |   State 4:
+# a -->Green    |   B -->Green  |   e-->Green   |   E -->Green
+# b -->Green    |   C -->Green  |   g-->Green   |   F-->Green
+# c -->Green    |   D -->Green  |   f-->Green   |   G--> Green
+# E -->Green    |   A-->Green   |   G-->Green   |   e-->Green
+
 state_list = ["RED", "YELLOW", "GREEN"]
 
 

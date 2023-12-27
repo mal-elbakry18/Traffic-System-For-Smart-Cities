@@ -1,16 +1,22 @@
 import time
 
+# Diagram of the road
+# ____________________--------______________>
+# ____________________--------______________>
+# ____________________--------______________>
+# ____________________--------______________>
+# <____________________--------______________
+# <____________________--------______________
+# <____________________--------______________
+# <____________________--------______________
+
+
 # Global variables for the class check states:
-'''number_of_cars = 0
-number_of_people = 0
-cars_passed = 12'''
 state_list = ["RED", "YELLOW", "GREEN"]
-'''tr = 0
-tg = 0
-ty = 3
-p_state = state_list[0]'''
 
 
+# Function to check the states by time and by number of cars (in case of red)
+# and number of people(in case of green)
 class Check_states:
 
     def __init__(self):
@@ -30,7 +36,6 @@ class Check_states:
             return "YELLOW"
         elif tr == 30 and number_of_cars == 0:
             self.tr = 0
-            # check_red_state(tr, number_of_cars)
             return "RED"
         else:
             return "RED"
