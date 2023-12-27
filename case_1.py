@@ -11,7 +11,7 @@ ty = 3
 p_state = state_list[0]'''
 
 
-class Check_states():
+class Check_states:
 
     def __init__(self):
         self.number_of_cars = 0
@@ -53,14 +53,12 @@ class Check_states():
         if tg == 50 and number_of_people > 0:
             self.tg = 0
             return "YELLOW"
-        elif (tg == 50 and number_of_people == 0) :
+        elif tg == 50 and number_of_people == 0:
             self.tg = 0
             return "YELLOW"
         else:
             return "GREEN"
 
-
-# def transtion_of_states(self):
 
 '''
     state_dict = {state_list[0]: check_red_state(tr, number_of_cars),
@@ -78,8 +76,6 @@ class RED_STATE(Check_states):
 
 class YELLOW_STATE(Check_states):
     def switch(self, check_states_instances):
-
-
         if check_states_instances.current_state == "RED":
             check_states_instances.next_state = state_list[2]
             check_states_instances.p_state = state_list[0]
@@ -97,15 +93,14 @@ class GREEN_STATE(Check_states):
         check_states_instances.current_state = state_list[2]
 
 
-
 def main():
     nb_of_cars = 20
     nb_of_people = 10
-    state = state_list[1]
     Check_states_obj = Check_states()
     Red_state_instances = RED_STATE()
     Yellow_state_instances = YELLOW_STATE()
     Green_state_instances = GREEN_STATE()
+
     while True:
         for i in range(30):
 
@@ -163,11 +158,6 @@ def main():
         Red_state_instances.switch(Check_states_obj)
         print(f"Current state is: {Check_states_obj.current_state}")
         print(f"Previous state is:{Check_states_obj.p_state}")
-
-
-
-
-
 
 
 if __name__ == '__main__':

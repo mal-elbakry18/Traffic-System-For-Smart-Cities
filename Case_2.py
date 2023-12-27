@@ -55,7 +55,6 @@ class Lane():
         else:
             return "RED"
 
-
     def check_yellow_state(self, ty, p_state):
         if ty == 5 and p_state == "RED":
             self.ty = 0
@@ -80,6 +79,7 @@ class Lane():
     def check_nb_of_cars(self):
         return self.nb_of_cars
 
+
 class RED_STATE(Lane):
     def switch(self, lane_instances):
         lane_instances.p_state = state_list[1]
@@ -100,8 +100,8 @@ class YELLOW_STATE(Lane):
 
 class GREEN_STATE(Lane):
     def switch(self, lane_instances):
-        lane_instances.p_state = state_list[1] # Yellow
-        lane_instances.current_state = state_list[2] # Green
+        lane_instances.p_state = state_list[1]  # Yellow
+        lane_instances.current_state = state_list[2]  # Green
 
 
 class Initialize_lane:
@@ -151,8 +151,8 @@ class Initialize_lane:
         self.Red_state_obj.switch(self.lane_G)
         self.Red_state_obj.switch(self.lane_H)
 
-
         return "STATE_1"
+
     def state_1_yellow(self):
         # Switch to yellow after red
         red_lane = [self.lane_a, self.lane_b, self.lane_c,
@@ -269,7 +269,6 @@ class Initialize_lane:
         self.Yellow_state_obj.switch(green_lane)
 
 
-
 def main():
     init_lanes = Initialize_lane()
 
@@ -284,7 +283,7 @@ def main():
             print("-----------------------------------------------")
             print(f"{lane.current_state}")
         print(f"Current time: {lane.tg}")
-        time.sleep(0)
+        time.sleep(1)
     init_lanes.state_1_yellow()
     lanes = [init_lanes.lane_a, init_lanes.lane_b, init_lanes.lane_c, init_lanes.lane_E]
     for j in range(3):
@@ -295,7 +294,8 @@ def main():
             print(f"{lane}: current state is: {lane.current_state}")
 
         print(f"Current time: {lane.ty}")
-        time.sleep(0)
+        time.sleep(1)
+
 
 '''    init_lanes.state_2()
 
@@ -307,9 +307,6 @@ def main():
     init_lanes.lane_a.tg += 1
     print(f"{init_lanes.lane_a.current_state}")
 '''
-
-
-
 
 '''red_lanes_1 = [self.lane_d, self.lane_e, self.lane_f, self.lane_g, self.lane_h, self.lane_A, self.lane_B, self.lane_C,
                    self.lane_D,
@@ -324,23 +321,11 @@ def main():
             print(f"{lane} is in RED state.")
     print("Out of loop ")'''
 
-
 ''' for i in range(30):
         init_lanes.lane_a.check_red_state(init_lanes.lane_a.tr, nb_of_cars)
         init_lanes.lane_b.check_red_state(init_lanes.lane_b.tr, nb_of_cars)
         init_lanes.lane_c.check_red_state(init_lanes.lane_c.tr, nb_of_cars)
         init_lanes.lane_E.check_red_state(init_lanes.lane_E.tr, nb_of_cars)'''
 
-
-
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
