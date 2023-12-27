@@ -1,18 +1,22 @@
 import time
 import random
+import C3gui
+from PyQt5.QtWidgets import QApplication
 
 class TrafficLight:
     # Constructor method
-    def __init__(self, name, initial_state):
-        self.name = name  # The name of the traffic light.
-        self.state = initial_state  # The initial state of the traffic light ("RED" or "GREEN").
-        self.car_count = 0  # The number of cars waiting at the light.
-        self.time_in_state = 0  # The number of seconds the light has been in its current state.
+    def __init__(self, name, initial_state, widget):
+        self.name = name
+        self.state = initial_state
+        self.car_count = 0
+        self.time_in_state = 0
+        self.widget = widget
 
-    # Method to change the state of the traffic light.
     def change_state(self, next_state):
-        self.state = next_state  # Set the new state.
-        self.time_in_state = 0  # Reset the time in this state.
+        self.state = next_state
+        self.time_in_state = 0
+        self.widget.state = next_state
+        self.widget.update()
 
     # Method to simulate a car arriving at the light.
     def add_car(self):
@@ -34,12 +38,6 @@ class Intersection:
     # Method to operate the intersection for a certain number of seconds.
     def operate(self, time_limit):
         for _ in range(time_limit):
-            # Randomly add cars to the traffic lights.
-            # will add a car every two seconds.
-            if random.randint(0, 1) == 0:
-                self.light1.add_car()
-            if random.randint(0, 1) == 0:
-                self.light2.add_car()
 
             # If a light is green, remove a car from its queue.
             if self.light1.state == "GREEN":
@@ -71,19 +69,20 @@ class Intersection:
                     self.light1.change_state("GREEN")
                     self.state = 1
 
-            # testinggg
-            print(f"After {_ + 1} seconds:")
-            print(f"{self.light1.name} is {self.light1.state} with {self.light1.car_count} cars waiting.")
-            print(f"{self.light2.name} is {self.light2.state} with {self.light2.car_count} cars waiting.")
-            print("--------------------")
-
             # Each loop run = one second
             time.sleep(1)
 
 # Create two traffic lights with initial states.
-light1 = TrafficLight("Light 1", "GREEN")
-light2 = TrafficLight("Light 2", "RED")
-intersection = Intersection(light1, light2)
-intersection.operate(30)
-
-
+# light1_widget = C3gui.TrafficLightWidget()
+# light2_widget = C3gui.TrafficLightWidget()
+# light1 = TrafficLight("Light 1", "GREEN", light1_widget)  # Pass the widget instance
+# light2 = TrafficLight("Light 2", "RED", light2_widget)  # Pass the widget instance
+#
+# # Create an intersection with the two lights.
+# intersection = Intersection(light1, light2)
+#
+# # Create and run the GUI.
+# app = QApplication([])
+# gui = C3gui.TrafficLightGUI(intersection)
+# gui.show()
+# app.exec_()
