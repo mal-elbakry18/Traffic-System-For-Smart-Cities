@@ -1,4 +1,6 @@
 import time
+import tkinter as tk
+import first_page_gui as gui
 
 # Diagram of the road
 # ____________________--------______________>
@@ -43,10 +45,10 @@ class Check_states:
     # keep record of the previous state
 
     def check_yellow_state(self, ty, p_state):
-        if ty == 3 and p_state == "RED":
+        if ty == 5 and p_state == "RED":
             self.ty = 0
             return "GREEN"
-        elif ty == 3 and p_state == "GREEN":
+        elif ty == 5 and p_state == "GREEN":
             self.ty = 0
             return "RED"
         else:
@@ -55,14 +57,25 @@ class Check_states:
     # Check for the number of cars passed
 
     def check_green_state(self, tg, number_of_people):
-        if tg == 50 and number_of_people > 0:
+        if tg == 30 and number_of_people > 0:
             self.tg = 0
             return "YELLOW"
-        elif tg == 50 and number_of_people == 0:
+        elif tg == 30 and number_of_people == 0:
             self.tg = 0
             return "YELLOW"
         else:
             return "GREEN"
+
+    def get_current_state(self):
+        return self.current_state
+
+    def get_timer(self):
+        if self.current_state == "RED":
+            return self.tr
+        elif self.current_state == "YELLOW":
+            return self.ty
+        elif self.current_state == "GREEN":
+            return self.tg
 
 
 '''
@@ -98,6 +111,11 @@ class GREEN_STATE(Check_states):
         check_states_instances.current_state = state_list[2]
 
 
+class Return:
+    def first_loop(self, state):
+        return state
+
+
 def main():
     nb_of_cars = 20
     nb_of_people = 10
@@ -105,39 +123,43 @@ def main():
     Red_state_instances = RED_STATE()
     Yellow_state_instances = YELLOW_STATE()
     Green_state_instances = GREEN_STATE()
+    return_obj = Return()
 
     while True:
         for i in range(30):
-
             Check_states_obj.check_red_state(Check_states_obj.tr, nb_of_cars)
             Check_states_obj.tr += 1
             print(f"Current time is {Check_states_obj.tr}")
             time.sleep(1)
             if nb_of_cars > 12 or nb_of_cars < 12:
-                if nb_of_cars == 0:
-                    break
-                nb_of_cars -= 1
+                if nb_of_cars != 0:
+                    nb_of_cars -= 1
+                else:
+                    nb_of_cars = 0
+
             if Check_states_obj.tr == 0 and nb_of_cars == 0:
                 i = 0
-        print(f"{Check_states_obj.current_state}")
-        print(f"Number of cars: {nb_of_cars}")
-        print("out of loop 1 ")
+            state = Check_states_obj.current_state
+            return_obj.first_loop(state)
+
+            print(f"{Check_states_obj.current_state}")
+            print(f"Number of cars: {nb_of_cars}")
+            #print("out of loop 1 ")
         Yellow_state_instances.switch(Check_states_obj)
         print(f"Previous state is:{Check_states_obj.p_state}")
         print(f"Current state is:{Check_states_obj.current_state}")
 
-        for j in range(3):
-
+        for j in range(5):
             Check_states_obj.check_yellow_state(Check_states_obj.ty, Check_states_obj.p_state)
             Check_states_obj.ty += 1
             print(f"Current time is {Check_states_obj.ty}")
             time.sleep(1)
-        print("out of loop 2")
+        #print("out of loop 2")
         Green_state_instances.switch(Check_states_obj)
         print(f"Current state is: {Check_states_obj.current_state}")
         print(f"Previous state is:{Check_states_obj.p_state}")
 
-        for k in range(50):
+        for k in range(30):
 
             Check_states_obj.check_green_state(Check_states_obj.tg, nb_of_people)
             Check_states_obj.tg += 1
@@ -146,14 +168,13 @@ def main():
             if nb_of_people >= 12:
                 nb_of_people -= 1
 
-        print("out of loop 3")
+        #print("out of loop 3")
 
         Yellow_state_instances.switch(Check_states_obj)
         print(f"Current state is:{Check_states_obj.current_state}")
         print(f"Previous state is:{Check_states_obj.p_state}")
 
-        for j in range(3):
-
+        for j in range(5):
             Check_states_obj.check_yellow_state(Check_states_obj.ty, Check_states_obj.p_state)
             Check_states_obj.ty += 1
             print(f"Current time is {Check_states_obj.ty}")
@@ -164,6 +185,5 @@ def main():
         print(f"Current state is: {Check_states_obj.current_state}")
         print(f"Previous state is:{Check_states_obj.p_state}")
 
-
 if __name__ == '__main__':
-    main()
+   main()
