@@ -131,11 +131,11 @@ class TrafficLightPage:
         plt.show()
 
     def open_nfa_3(self):
-        states = ['G1R2', 'Y1R2', 'R1G1', 'R1Y2']
-        alphabet = ['NC>12 || T >50', 'T=5', 'T>50 || NC>12']
-        transition_function = {('G1R2', 'NC>12 || T >50'): 'Y1R2',
-                               ('1Y1R2', 'T=5'): 'R1G1',
-                               ('R1G1', 'T>50 || NC>12'): 'R1Y2',
+        states = ['G1R2', 'Y1R2', 'R1G2', 'R1Y2']
+        alphabet = ['NC_2>12 || T >50', 'T=5', 'T>50 || NC_1>12']
+        transition_function = {('G1R2', 'NC_2>12 || T >50'): 'Y1R2',
+                               ('Y1R2', 'T=5'): 'R1G2',
+                               ('R1G2', 'T>50 || NC_1>12'): 'R1Y2',
                                ('R1Y2', 'T=5'): 'G1R2'}
         start_state = 'R1G1'
         accept_states = {'R1G1', 'G1R2'}

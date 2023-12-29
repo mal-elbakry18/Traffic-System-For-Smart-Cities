@@ -295,7 +295,7 @@ def main():
         lanes = [init_lanes.lane_a, init_lanes.lane_b, init_lanes.lane_c, init_lanes.lane_E]
         for j in range(3):
             for lane in lanes:
-                lane.check_yellow_state(lane.ty, lane.p_state)
+                lane.check_yellow_state(lane.ty, lane.current_state)
                 lane.ty += 1
                 print("-----------------------------------------------")
                 print(f"lane current state is: {lane.current_state}")
@@ -304,6 +304,7 @@ def main():
             time.sleep(1)
 
         lanes_2_G = [init_lanes.lane_a, init_lanes.lane_B, init_lanes.lane_C, init_lanes.lane_D]
+        init_lanes.state_2()
         for i in range(30):
             for lane in lanes_2_G:
                 lane.check_green_state(lane.tg)
